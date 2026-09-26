@@ -3,12 +3,18 @@ from __future__ import annotations
 
 import csv
 from decimal import Decimal
+import hashlib
 import json
 from pathlib import Path
 import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent
+INPUT_SHA256 = {
+    'brief.md': '07550b07f915e03ad122ffa46ea474c60f31880490c07e95eb257956531019ac',
+    'ventas.csv': '9f37384d259484f9aa887607a024ed3db357c1e177006c24076da1782a21375d',
+    'gastos.csv': '0681f96ce4425fdbb0ad9f90683167a235208b68c920436f9c1c4efe6a4cecb7',
+}
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -46,6 +52,9 @@ def verify(agent: str) -> dict:
     results: dict[str, int] = {}
     if not instance.is_dir():
         return {'agent': agent, 'errors': ['instance/ missing']}
+    for name in INPUT_SHA256:
+        if (area / ('brief.md' if name == 'brief.md' else f'inputs/{name}')).read_bytes() != (ROOT / 'shared' / name).read_bytes():
+            errors.append(f'{name}: agent input differs from shared fixture')
     inputs = {name: area / 'inputs' / f'{name}.csv' for name in ('ventas', 'gastos')}
     originals = {name: instance / 'proyectos/entradas' / f'{name}.csv' for name in inputs}
     working = {name: instance / 'proyectos' / name / f'{name}.csv' for name in inputs}
@@ -98,6 +107,11 @@ def verify(agent: str) -> dict:
 
 
 if __name__ == '__main__':
+    for name, expected in INPUT_SHA256.items():
+        actual = hashlib.sha256((ROOT / 'shared' / name).read_bytes()).hexdigest()
+        if actual != expected:
+            print(f'{name}: shared fixture hash mismatch', file=sys.stderr)
+            sys.exit(1)
     reports = [verify(name) for name in ('codex', 'glm')]
     print(json.dumps(reports, ensure_ascii=False, indent=2))
     sys.exit(1 if any(report['errors'] for report in reports) else 0)
