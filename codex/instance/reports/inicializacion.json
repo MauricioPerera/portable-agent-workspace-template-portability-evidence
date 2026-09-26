@@ -1,0 +1,15 @@
+{
+  "route": "scaffold",
+  "template_version": "0.4.2",
+  "template_digest": "3941435bd57586ca00410b62533342ddae57aba44841c26ef222f386aede7ec3",
+  "elapsed_seconds": 0.633764,
+  "commands": [
+    {
+      "command": "python scripts/first_run.py",
+      "exit_code": 0,
+      "stdout": "OK: first-run inventory and evidence match current workspace\nPrimer uso completado: proyectos/primer-uso/inventario.json; evidencia: reports/primer-uso.json\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "Tiempo local de generación y primer uso; excluye descarga y razonamiento de la IA."
+}

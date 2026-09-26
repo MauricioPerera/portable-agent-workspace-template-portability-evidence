@@ -1,0 +1,31 @@
+{
+  "caso": "portabilidad: ventas y gastos",
+  "fecha": "2026-09-25",
+  "resumen_ubicacion_final": "instance/proyectos/seguimiento/resumen.json",
+  "script_resumen": "instance/proyectos/seguimiento/resumen.py",
+  "resultado_final": {
+    "2026-01": { "ventas": 225.0, "gastos": 50.0, "diferencia": 175.0 },
+    "2026-02": { "ventas": 200.0, "gastos": 40.0, "diferencia": 160.0 }
+  },
+  "hechos": [
+    "Generada la instancia con scripts/init_workspace.py de la distribución y comprobado el primer uso.",
+    "Copias byte a byte de inputs/ventas.csv y inputs/gastos.csv en proyectos/entradas/ (hashes SHA-256 idénticos); copias de trabajo en proyectos/ventas/ y proyectos/gastos/.",
+    "resumen.py agrupa importes por mes (Decimal) y produce resumen.json; copia inicial en reports/resumen-inicial.json.",
+    "Añadida V-004 (2026-01-25, 25.00 EUR) a la copia de trabajo de ventas; script y resultado trasladados a proyectos/seguimiento/, eliminada proyectos/resumen/ y recalculado.",
+    "Skill skills/recalcular-resumen.md y contrato contracts/recalcular-resumen.md añadidos, índices actualizados; oráculo independiente scripts/comprobar_resumen.py contrasta el JSON final con los CSV de trabajo.",
+    "Primer uso regenerado tras la nueva skill: el inventario la incluye."
+  ],
+  "comandos": [
+    { "command": "python distribution/scripts/init_workspace.py --name \"Portability Trial 042\" --destination instance --route scaffold", "exit_code": 0, "cwd": "glm (raíz del caso)" },
+    { "command": "python scripts/check_first_run.py", "exit_code": 0, "cwd": "instance", "fase": "primer uso inicial" },
+    { "command": "python proyectos/resumen/resumen.py", "exit_code": 0, "cwd": "instance", "fase": "cálculo inicial" },
+    { "command": "python proyectos/seguimiento/resumen.py", "exit_code": 0, "cwd": "instance", "fase": "traslado y recálculo con V-004" },
+    { "command": "python scripts/comprobar_resumen.py", "exit_code": 0, "cwd": "instance", "fase": "test_command del contrato" },
+    { "command": "python scripts/comprobar_resumen.py (con JSON alterado)", "exit_code": 1, "cwd": "instance", "fase": "comprobación negativa del oráculo: detectó 2026-01.ventas 999.0 vs 225.00 y luego se restauró" },
+    { "command": "python scripts/first_run.py", "exit_code": 0, "cwd": "instance", "fase": "regeneración del inventario y evidencia con la nueva skill" },
+    { "command": "python scripts/check_first_run.py", "exit_code": 0, "cwd": "instance", "fase": "oráculo de primer uso tras cambios" },
+    { "command": "python scripts/validate_workspace.py", "exit_code": 0, "cwd": "instance" },
+    { "command": "python scripts/validate_okf_nodes.py", "exit_code": 0, "cwd": "instance", "nota": "16 nodos Markdown validados" }
+  ],
+  "alcance": "Cálculos derivados de los CSV de trabajo; sin cifras esperadas externas, sin red ni dependencias externas."
+}

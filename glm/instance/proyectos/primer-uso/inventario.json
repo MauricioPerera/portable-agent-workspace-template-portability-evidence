@@ -1,0 +1,10 @@
+{
+  "workspace": "portability-trial-042",
+  "spec_version": "0.2.0",
+  "sources": [],
+  "skills": [
+    "skills/primer-uso.md",
+    "skills/recalcular-resumen.md"
+  ],
+  "next_step": "Solicitar la primera tarea y sus fuentes; no inferir políticas de dominio."
+}

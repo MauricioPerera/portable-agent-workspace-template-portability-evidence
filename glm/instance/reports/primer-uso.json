@@ -1,0 +1,30 @@
+{
+  "contract": "contracts/primer-uso.md",
+  "contract_version": "1.0.0",
+  "command": "python scripts/first_run.py",
+  "test_command": "python scripts/check_first_run.py",
+  "created_at": "2026-09-26T04:38:05.431167+00:00",
+  "python": "3.14.6",
+  "elapsed_seconds": 0.034254,
+  "inputs_sha256": {
+    "manifest.yaml": "9ab5d77d94d04507f7c6623689bed5fc8e5647d2f86dacd4887d73da41d3a74d",
+    "AGENTS.md": "b34b8973ffdc35d31769c1fc36ff92e659ad012dc0eaecf3ab56c7af0ad2139c",
+    "WORKSPACE-SPEC.md": "e7e6f6e2e7f2ff81a085d88172e78452c3e1e3aabc34444a29a723ca4e496b0b",
+    "context/index.md": "65ab8e60e7b04ee12237ae2a695726880284cb71c30cc74a122ed1848f7c934b",
+    "skills/index.md": "af45af2817d375af424f28216f9d8a59673a877dbbab8877fbdffdeb3ac5e9ef",
+    "skills/primer-uso.md": "81a68e0caf8a367accf93e886cc944350496d99051472398a6946ac64da7bacb",
+    "contracts/primer-uso.md": "f6a8c71e4d165ee8cccb78f44a346c0e1eaef6f590ffc31a2f1bffaf40f5a92e",
+    "memoria/preferencias_consolidadas.md": "3563daf1347b6df8b12b2f8893ca2c509381a145263d21cb947a69f21e60a520",
+    "scripts/first_run.py": "e9b4fe4172121069f083d8c8790e5a45286c654fc2929d6b1d9c7338790098a0",
+    "scripts/check_first_run.py": "f2072ccef32e2168aec5f750916075c0e12d6c6ba57ca00319c3d1abaff4a56f",
+    "scripts/validate_workspace.py": "5e1a10160c278c9bd36467d91c286d2253392fd9eadaa68087fed27cf69243c0",
+    "scripts/validate_okf_nodes.py": "78912b3951b14d6e46e96c7b476cbedade22b702681996c149118f308663b010"
+  },
+  "sources_sha256": {},
+  "output": "proyectos/primer-uso/inventario.json",
+  "output_sha256": "fd759eddd22055530f9090c16fdb7a0a1ff43a32fd366380ba5b6f0709106133",
+  "verification": {
+    "command": "python scripts/check_first_run.py --record",
+    "exit_code": 0
+  }
+}

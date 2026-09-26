@@ -1,0 +1,70 @@
+[
+  {
+    "agent": "codex",
+    "errors": [],
+    "exit_codes": {
+      "rerun_final_script": 0,
+      "validate_workspace.py": 0,
+      "validate_okf_nodes.py": 0,
+      "check_first_run.py": 0
+    },
+    "expected_initial": {
+      "2026-01": {
+        "ventas": "200.00",
+        "gastos": "50.00",
+        "diferencia": "150.00"
+      },
+      "2026-02": {
+        "ventas": "200.00",
+        "gastos": "40.00",
+        "diferencia": "160.00"
+      }
+    },
+    "expected_final": {
+      "2026-01": {
+        "ventas": "225.00",
+        "gastos": "50.00",
+        "diferencia": "175.00"
+      },
+      "2026-02": {
+        "ventas": "200.00",
+        "gastos": "40.00",
+        "diferencia": "160.00"
+      }
+    }
+  },
+  {
+    "agent": "glm",
+    "errors": [],
+    "exit_codes": {
+      "rerun_final_script": 0,
+      "validate_workspace.py": 0,
+      "validate_okf_nodes.py": 0,
+      "check_first_run.py": 0
+    },
+    "expected_initial": {
+      "2026-01": {
+        "ventas": "200.00",
+        "gastos": "50.00",
+        "diferencia": "150.00"
+      },
+      "2026-02": {
+        "ventas": "200.00",
+        "gastos": "40.00",
+        "diferencia": "160.00"
+      }
+    },
+    "expected_final": {
+      "2026-01": {
+        "ventas": "225.00",
+        "gastos": "50.00",
+        "diferencia": "175.00"
+      },
+      "2026-02": {
+        "ventas": "200.00",
+        "gastos": "40.00",
+        "diferencia": "160.00"
+      }
+    }
+  }
+]

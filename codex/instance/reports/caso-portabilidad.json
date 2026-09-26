@@ -1,0 +1,61 @@
+{
+  "descripcion": "Instancia creada desde la distribución; originales preservados, copias de trabajo calculadas por mes, venta V-004 añadida, resumen trasladado a seguimiento y contrato comprobado contra ambos CSV.",
+  "resumen_final": "proyectos/seguimiento/resumen.json",
+  "resumen_inicial": "reports/resumen-inicial.json",
+  "originales_iguales_byte_a_byte": {
+    "ventas.csv": true,
+    "gastos.csv": true
+  },
+  "carpeta_anterior_eliminada": true,
+  "primer_uso_incluye_skill": "skills/resumen-mensual.md",
+  "comandos": [
+    {
+      "desde": "carpeta de prueba",
+      "comando": "python distribution/scripts/init_workspace.py --name 'Caso Portabilidad Ventas Gastos' --destination instance",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python proyectos/resumen/resumen.py",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python proyectos/seguimiento/resumen.py",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python scripts/check_resumen.py",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python scripts/validate_okf_nodes.py",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python scripts/validate_workspace.py",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python scripts/first_run.py",
+      "codigo_salida": 0
+    },
+    {
+      "desde": "instance",
+      "comando": "python scripts/check_first_run.py",
+      "codigo_salida": 0
+    }
+  ],
+  "totales_iniciales": {
+    "2026-01": {"ventas": 200.0, "gastos": 50.0, "diferencia": 150.0},
+    "2026-02": {"ventas": 200.0, "gastos": 40.0, "diferencia": 160.0}
+  },
+  "totales_finales": {
+    "2026-01": {"ventas": 225.0, "gastos": 50.0, "diferencia": 175.0},
+    "2026-02": {"ventas": 200.0, "gastos": 40.0, "diferencia": 160.0}
+  }
+}
