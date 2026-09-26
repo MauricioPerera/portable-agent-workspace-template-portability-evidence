@@ -6,7 +6,9 @@
       "rerun_final_script": 0,
       "validate_workspace.py": 0,
       "validate_okf_nodes.py": 0,
-      "check_first_run.py": 0
+      "check_first_run.py": 0,
+      "check_resumen.py": 0,
+      "check_resumen.py_tampered": 1
     },
     "expected_initial": {
       "2026-01": {
@@ -40,7 +42,9 @@
       "rerun_final_script": 0,
       "validate_workspace.py": 0,
       "validate_okf_nodes.py": 0,
-      "check_first_run.py": 0
+      "check_first_run.py": 0,
+      "comprobar_resumen.py": 0,
+      "comprobar_resumen.py_tampered": 1
     },
     "expected_initial": {
       "2026-01": {

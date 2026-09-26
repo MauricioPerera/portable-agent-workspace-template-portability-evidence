@@ -6,8 +6,10 @@ from decimal import Decimal
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parent
 INPUT_SHA256 = {
@@ -15,6 +17,7 @@ INPUT_SHA256 = {
     'ventas.csv': '9f37384d259484f9aa887607a024ed3db357c1e177006c24076da1782a21375d',
     'gastos.csv': '0681f96ce4425fdbb0ad9f90683167a235208b68c920436f9c1c4efe6a4cecb7',
 }
+CUSTOM_TEST = {'codex': 'check_resumen.py', 'glm': 'comprobar_resumen.py'}
 
 
 def rows(path: Path) -> list[dict[str, str]]:
@@ -92,6 +95,22 @@ def verify(agent: str) -> dict:
             results[script_name] = code
             if code != 0:
                 errors.append(f'{script_name} failed: {output[:300]}')
+        custom_test = CUSTOM_TEST[agent]
+        code, output = command([sys.executable, f'scripts/{custom_test}'], instance)
+        results[custom_test] = code
+        if code != 0:
+            errors.append(f'{custom_test} failed: {output[:300]}')
+        with tempfile.TemporaryDirectory() as folder:
+            isolated = Path(folder) / 'instance'
+            shutil.copytree(instance, isolated, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+            tampered_path = isolated / 'proyectos/seguimiento/resumen.json'
+            tampered = json.loads(tampered_path.read_text(encoding='utf-8'))
+            tampered['2026-01']['ventas'] = 999.0
+            tampered_path.write_text(json.dumps(tampered), encoding='utf-8')
+            negative_code, _ = command([sys.executable, f'scripts/{custom_test}'], isolated)
+            results[f'{custom_test}_tampered'] = negative_code
+            if negative_code == 0:
+                errors.append(f'{custom_test} accepted a tampered January total')
         if not (instance / 'reports/caso-portabilidad.json').is_file():
             errors.append('agent execution report missing')
         if not [p for p in (instance / 'skills').glob('*.md') if p.name not in {'index.md', 'primer-uso.md'}]:

@@ -6,7 +6,7 @@ Este repositorio conserva el caso ficticio descrito en el [informe de portabilid
 
 - `shared/`: brief y dos CSV originales. Los mismos bytes se entregaron a Codex y GLM.
 - `codex/` y `glm/`: copias del brief, los CSV entregados y las instancias resultantes. Se excluyeron las distribuciones duplicadas y las cachés Python; los archivos de trabajo, contratos, scripts, informes y evidencia de primer uso se conservan.
-- `verify_results.py`: verificador externo a las instancias, que calcula con `Decimal` los totales desde los CSV, comprueba los originales preservados, la venta añadida, el traslado del resumen y los validadores de cada instancia.
+- `verify_results.py`: verificador externo a las instancias, que calcula con `Decimal` los totales desde los CSV, comprueba los originales preservados, la venta añadida, el traslado del resumen y los validadores de cada instancia. Ejecuta también cada oráculo propio y comprueba en una copia temporal que rechaza un total alterado.
 - `verification.json`: salida guardada del verificador sobre estas copias.
 
 ## Comprobar la evidencia publicada
